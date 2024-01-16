@@ -146,7 +146,7 @@ type User = t.TypeOf<typeof User>
 
 const User = t.type({
   name: t.string,
-  birthday: DateFromString,
+  birthday: DateFromString, // npm: io-ts-types
 });
 ```
 
