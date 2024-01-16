@@ -71,6 +71,49 @@ or
 const user: User = validate(userFromNetwork);
 ```
 
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+---
+transition: fade-out
+---
+
+# How can io-ts help us?
+
+What can we do?
+
+We can build a codec
+
+```ts
+type User = t.TypeOf<typeof User>
+
+const User = t.type({
+  name: t.string,
+  age: t.number,
+});
+```
+
+We can validate (decode) the value
+
+```ts
+const user: t.Validation<User> = User.decode(userFromNetwork);
+```
+
+or
+
+```ts
+const user: User = pipe(userFromNetwork, User.decode, E.fold((e) => { throw e; }, identity));
+```
+
 <!--
 You can have `style` tag in markdown to override the style for the current page.
 Learn more: https://sli.dev/guide/syntax#embedded-styles
