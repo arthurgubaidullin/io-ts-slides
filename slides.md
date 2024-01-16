@@ -131,6 +131,51 @@ h1 {
 }
 </style>
 
+---
+transition: fade-out
+---
+
+# Can we transfer an instance of the Date class?
+
+Yes
+
+We have
+
+```ts
+type User = t.TypeOf<typeof User>
+
+const User = t.type({
+  name: t.string,
+  birthday: DateFromString,
+});
+```
+
+and
+
+```ts
+const userFromNetwork: unknown = User.encode({ name: 'foo', birthday: new Date() });
+```
+
+We can validate (decode) the value
+
+```ts
+const user: t.Validation<User> = User.decode(userFromNetwork);
+```
+
+This is it.
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
 <!--
 Here is another comment.
 -->
