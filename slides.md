@@ -40,22 +40,30 @@ The last comment block of each slide will be treated as slide notes. It will be 
 transition: fade-out
 ---
 
-# What is Slidev?
+# What problem do we want to solve?
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+We want the types to always be consistent with the value
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
+We have
 
-<br>
-<br>
+```ts
+type User = {
+  name: string
+  age: number
+}
+```
 
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+We can get
+
+```ts
+const userFromNetwork: unknown = { name: 'foo', age: 33 };
+```
+
+We want to achieve
+
+```ts
+const user: User = validate(userFromNetwork);
+```
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
