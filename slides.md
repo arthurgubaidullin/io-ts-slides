@@ -5,18 +5,17 @@ class: text-center
 highlighter: shikiji
 lineNumbers: false
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
+  ## io-ts presentation slides for developers.
 
-  Learn more at [Sli.dev](https://sli.dev)
+  Learn more at [io-ts](https://github.com/gcanti/io-ts/blob/master/index.md)
 drawings:
   persist: false
 transition: slide-left
-title: Welcome to Slidev
+title: Welcome to io-ts
 mdc: true
 ---
 
-# Welcome to Slidev
+# Welcome to io-ts
 
 Presentation slides for developers
 
@@ -27,10 +26,7 @@ Presentation slides for developers
 </div>
 
 <div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
+  <a href="https://github.com/arthurgubaidullin/io-ts-slides" target="_blank" alt="GitHub" title="Open in GitHub"
     class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <carbon-logo-github />
   </a>
