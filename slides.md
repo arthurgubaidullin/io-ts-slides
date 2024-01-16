@@ -48,8 +48,8 @@ We have
 
 ```ts
 type User = {
-  name: string
-  age: number
+  name: string;
+  age: number;
 }
 ```
 
@@ -60,6 +60,12 @@ const userFromNetwork: unknown = { name: 'foo', age: 33 };
 ```
 
 We want to achieve
+
+```ts
+const user: Either<Error, User> = validate(userFromNetwork);
+```
+
+or
 
 ```ts
 const user: User = validate(userFromNetwork);
