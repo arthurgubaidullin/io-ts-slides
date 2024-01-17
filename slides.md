@@ -222,6 +222,57 @@ h1 {
 </style>
 
 ---
+transition: fade-out
+---
+
+# What about an end-to-end experience?
+
+It depends. Most of the time it is easy.
+
+We can do
+
+```ts {all} twoslash
+import * as E from "fp-ts/Either";
+import { identity, pipe } from "fp-ts/lib/function";
+import * as t from "io-ts";
+
+declare const fetcher: { post: (request: unknown) => unknown };
+
+// ---cut---
+const Request = t.type({ foo: t.literal("foo") });
+
+const Response = t.type({ bar: t.literal("bar") });
+
+export const doSomethingOnClient = (
+  request: t.TypeOf<typeof Request>
+): E.Either<Error, t.TypeOf<typeof Response>> =>
+  pipe(request, Request.encode, fetcher.post, Response.decode, E.mapLeft(E.toError));
+
+export const doSomethingOnServer = (
+  request: t.OutputOf<typeof Request>,
+  response: { write: (response: unknown) => void }
+): void =>
+  pipe(
+    request, Request.decode, E.fold((e) => { throw E.toError(e); }, identity), 
+    () => ({ bar: "bar" as const }), 
+    Response.encode, response.write);
+```
+
+This is it.
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+---
 layout: default
 ---
 
