@@ -93,7 +93,9 @@ What can we do?
 
 We can build a codec
 
-```ts
+```ts twoslash
+import * as t from "io-ts";
+// ---cut---
 type User = t.TypeOf<typeof User>
 
 const User = t.type({
@@ -104,15 +106,40 @@ const User = t.type({
 
 We can validate (decode) the value
 
-```ts
+```ts twoslash
+import * as t from "io-ts";
+type User = t.TypeOf<typeof User>
+
+const User = t.type({
+  name: t.string,
+  age: t.number,
+});
+
+const userFromNetwork: unknown = { name: 'foo', age: 33 };
+// ---cut---
 const user: t.Validation<User> = User.decode(userFromNetwork);
 ```
 
 or
 
-```ts
+```ts ts twoslash
+import * as t from "io-ts";
+import { pipe, identity } from 'fp-ts/function'
+import * as E from 'fp-ts/Either'
+
+type User = t.TypeOf<typeof User>
+
+const User = t.type({
+  name: t.string,
+  age: t.number,
+});
+
+const userFromNetwork: unknown = { name: 'foo', age: 33 };
+// ---cut---
 const user: User = pipe(userFromNetwork, User.decode, E.fold((e) => { throw e; }, identity));
 ```
+
+This is it.
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
