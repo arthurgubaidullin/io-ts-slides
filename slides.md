@@ -135,7 +135,7 @@ h1 {
 transition: fade-out
 ---
 
-# Can we transfer an instance of the Date class?
+# Can we encode & decode an instance of the Date class?
 
 Yes
 
@@ -176,9 +176,50 @@ h1 {
 }
 </style>
 
-<!--
-Here is another comment.
--->
+---
+transition: fade-out
+---
+
+# Can we encode & decode an object as a string?
+
+Yes
+
+We have
+
+```ts
+type User = t.TypeOf<typeof User>
+
+const User = t.string.pipe(JsonFromString).pipe(t.type({
+  name: t.string,
+  birthday: DateFromString, // npm: io-ts-types
+}));
+```
+
+and
+
+```ts
+const userFromNetwork: unknown = User.encode({ name: 'foo', birthday: new Date() });
+```
+
+We can validate (decode) the value
+
+```ts
+const user: t.Validation<User> = User.decode(userFromNetwork);
+```
+
+This is it.
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
 
 ---
 layout: default
