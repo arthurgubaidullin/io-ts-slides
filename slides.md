@@ -186,24 +186,59 @@ Yes
 
 We have
 
-```ts
+```ts twoslash
+import * as t from "io-ts";
+import { JsonFromString, DateFromISOString } from "io-ts-types";
+
+// ---cut---
 type User = t.TypeOf<typeof User>
 
 const User = t.string.pipe(JsonFromString).pipe(t.type({
   name: t.string,
-  birthday: DateFromString, // npm: io-ts-types
+  birthday: DateFromISOString, // npm: io-ts-types
 }));
 ```
 
 and
 
-```ts
+```ts twoslash
+import * as t from "io-ts";
+import { JsonFromString, DateFromISOString } from "io-ts-types";
+
+type User = t.TypeOf<typeof User>;
+
+const User = t.string.pipe(JsonFromString).pipe(
+  t.type({
+    name: t.string,
+    birthday: DateFromISOString, // npm: io-ts-types
+  })
+);
+
+// ---cut---
 const userFromNetwork: unknown = User.encode({ name: 'foo', birthday: new Date() });
 ```
 
 We can validate (decode) the value
 
-```ts
+```ts twoslash
+import * as t from "io-ts";
+import { JsonFromString, DateFromISOString } from "io-ts-types";
+
+type User = t.TypeOf<typeof User>;
+
+const User = t.string.pipe(JsonFromString).pipe(
+  t.type({
+    name: t.string,
+    birthday: DateFromISOString, // npm: io-ts-types
+  })
+);
+
+const userFromNetwork: unknown = User.encode({
+  name: "foo",
+  birthday: new Date(),
+});
+
+// ---cut---
 const user: t.Validation<User> = User.decode(userFromNetwork);
 ```
 
