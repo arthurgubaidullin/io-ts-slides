@@ -231,7 +231,7 @@ It depends. Most of the time it is easy.
 
 We can do
 
-```ts {all} twoslash
+```ts twoslash
 import * as E from "fp-ts/Either";
 import { identity, pipe } from "fp-ts/lib/function";
 import * as t from "io-ts";
