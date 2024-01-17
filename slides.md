@@ -46,7 +46,7 @@ We want the types to always be consistent with the value
 
 We have
 
-```ts
+```ts twoslash
 type User = {
   name: string;
   age: number;
@@ -55,19 +55,39 @@ type User = {
 
 We can get
 
-```ts
+```ts twoslash
 const userFromNetwork: unknown = { name: 'foo', age: 33 };
 ```
 
 We want to achieve
 
-```ts
-const user: Either<Error, User> = validate(userFromNetwork);
+```ts twoslash
+import * as E from 'fp-ts/Either'
+
+declare function validate(user: unknown): E.Either<Error, User>
+
+const userFromNetwork: unknown = { name: 'foo', age: 33 };
+
+type User = {
+  name: string;
+  age: number;
+}
+// ---cut---
+const user: E.Either<Error, User> = validate(userFromNetwork);
 ```
 
 or
 
-```ts
+```ts twoslash
+declare function validate(user: unknown): User
+
+const userFromNetwork: unknown = { name: 'foo', age: 33 };
+
+type User = {
+  name: string;
+  age: number;
+}
+// ---cut---
 const user: User = validate(userFromNetwork);
 ```
 
